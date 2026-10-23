@@ -2,4 +2,4 @@ Flask
 gunicorn
 PyHive
 thrift
-thrift_sasl
+thrift-sasl
