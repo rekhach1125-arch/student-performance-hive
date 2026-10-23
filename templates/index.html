@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Student Performance Analysis</h1>
+    <p>Powered by Apache Hive</p>
+
+    {% if stats %}
+    <div class="dashboard">
+        <div class="stat-card students">
+            <span>Total Students</span>
+            <h2>{{ stats[0] }}</h2>
+        </div>
+        <div class="stat-card attendance">
+            <span>Average Attendance</span>
+            <h2>{{ "%.2f"|format(stats[1] or 0) }}%</h2>
+        </div>
+        <div class="stat-card marks">
+            <span>Average Marks</span>
+            <h2>{{ "%.2f"|format(stats[2] or 0) }}%</h2>
+        </div>
+        <div class="stat-card departments">
+            <span>Departments</span>
+            <h2>{{ stats[3] }}</h2>
+        </div>
+    </div>
+    {% endif %}
+
+    <form method="POST">
+        <input type="text" name="search"
+               placeholder="Enter Student ID or Name"
+               value="{{ search }}" required>
+        <button type="submit">Search Student</button>
+    </form>
+
+    {% if error %}
+        <p class="error">Error: {{ error }}</p>
+    {% endif %}
+
+    {% if students %}
+        {% for s in students %}
+            {% set total = s[5] + s[6] + s[7] %}
+            {% set percentage = total / 3 %}
+            {% if percentage >= 90 %}
+                {% set grade = 'A+' %}
+            {% elif percentage >= 80 %}
+                {% set grade = 'A' %}
+            {% elif percentage >= 70 %}
+                {% set grade = 'B' %}
+            {% elif percentage >= 60 %}
+                {% set grade = 'C' %}
+            {% elif percentage >= 50 %}
+                {% set grade = 'D' %}
+            {% else %}
+                {% set grade = 'F' %}
+            {% endif %}
+
+            <div class="student-card">
+                <h2>{{ s[1] }} (ID: {{ s[0] }})</h2>
+                <p><b>Department:</b> {{ s[2] }}</p>
+                <p><b>Semester:</b> {{ s[3] }}</p>
+                <p><b>Attendance:</b> {{ s[4] }}%</p>
+
+                <h3>Subject Marks</h3>
+                <table>
+                    <tr><th>Subject</th><th>Marks</th></tr>
+                    <tr><td>Maths</td><td>{{ s[5] }}</td></tr>
+                    <tr><td>Science</td><td>{{ s[6] }}</td></tr>
+                    <tr><td>English</td><td>{{ s[7] }}</td></tr>
+                </table>
+
+                <p><b>Total:</b> {{ total }} / 300</p>
+                <p><b>Percentage:</b> {{ "%.2f"|format(percentage) }}%</p>
+                <p><b>Grade:</b> {{ grade }}</p>
+            </div>
+        {% endfor %}
+    {% elif request.method == 'POST' and not error %}
+        <p class="error">No student found. Please check the ID or name.</p>
+    {% endif %}
+</div>
+</body>
+</html>

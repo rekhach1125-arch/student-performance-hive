@@ -1,0 +1,192 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #eaf0ff, #f5f7fb);
+    color: #24324b;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 45px auto;
+    padding: 25px;
+}
+
+h1 {
+    text-align: center;
+    color: #233e91;
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+.container > p {
+    text-align: center;
+    color: #64748b;
+}
+
+form {
+    display: flex;
+    gap: 12px;
+    margin: 32px 0;
+    background: white;
+    padding: 15px;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px #24324b12;
+}
+
+input {
+    flex: 1;
+    min-width: 0;
+    padding: 14px;
+    border: 1px solid #d7deeb;
+    border-radius: 9px;
+    font-size: 16px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #526de5;
+    box-shadow: 0 0 0 3px #526de522;
+}
+
+button {
+    padding: 14px 22px;
+    border: none;
+    border-radius: 9px;
+    background: linear-gradient(135deg, #4f46e5, #2563eb);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.student-card {
+    background: white;
+    padding: 28px;
+    margin-top: 24px;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px #24324b12;
+    border-top: 5px solid #536dfe;
+}
+
+.student-card h2 {
+    color: #3449a5;
+    margin-top: 0;
+}
+
+.student-card h3 {
+    color: #334155;
+    margin-top: 28px;
+}
+
+.student-card p {
+    line-height: 1.7;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+th, td {
+    padding: 14px;
+    border-bottom: 1px solid #e5eaf3;
+    text-align: left;
+}
+
+th {
+    background: #e9edff;
+    color: #283b89;
+}
+
+tr:hover td {
+    background: #f7f8ff;
+}
+
+.error {
+    color: #c62828;
+    text-align: center;
+    font-weight: bold;
+    padding: 15px;
+    background: #fff0f0;
+    border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        margin: 15px auto;
+        padding: 12px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    form {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .student-card {
+        padding: 18px;
+    }
+}
+
+/* Dashboard Summary Cards */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin: 28px 0;
+}
+
+.stat-card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px #24324b12;
+    border-left: 5px solid;
+}
+
+.stat-card span {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.stat-card h2 {
+    margin: 12px 0 0;
+    font-size: 30px;
+}
+
+.students {
+    border-color: #4f46e5;
+}
+
+.attendance {
+    border-color: #16a34a;
+}
+
+.marks {
+    border-color: #f59e0b;
+}
+
+.departments {
+    border-color: #0891b2;
+}
+
+@media (max-width: 700px) {
+    .dashboard {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
